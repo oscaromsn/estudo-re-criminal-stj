@@ -59,6 +59,8 @@ P_ADV    = ("ADVOGADO", "ADVOGADA", "ADVOGADOS", "ADVOGADAS")
 # marcadores de que o feito e criminal
 CRIM_PAPEL = ("PACIENTE", "R[ÉE]U", "ACUSADO", "INDICIADO", "CORR[ÉE]U", "V[ÍI]TIMA",
               "ASSISTENTE DE ACUSA", "SENTENCIADO")
+# Sinal de que o feito e de improbidade administrativa — civel, apesar do MP.
+IMPROBIDADE = re.compile(r"improbidade|lei\s*n?\.?\s*8\.?429|ato[s]?\s+[íi]mprobo", re.I)
 
 def perfil(bruto, classe=""):
     titulo, pares = parse_cabecalho(bruto)
@@ -69,9 +71,17 @@ def perfil(bruto, classe=""):
     passivos = pega(P_PASSIVO)
     advs     = pega(P_ADV)
     papeis   = " ".join(p.upper() for p, _ in pares)
-    criminal = (bool(re.search("|".join(CRIM_PAPEL), papeis))
-                or bool(MP.search(" ".join(ativos + passivos)))
-                or "HABEAS CORPUS" in (classe or "").upper())
+    # O MP e parte em improbidade administrativa, e a presenca dele disparava o
+    # flag numa acao CIVIL. A contaminacao era de 2,4% no geral, mas concentrada
+    # em desfechos raros: 23 dos 37 casos de retratacao eram improbidade (Tema
+    # 1199, retroatividade da Lei 14.230/2021), nao materia criminal. Papel
+    # criminal explicito (PACIENTE, REU, ACUSADO) ou classe habeas corpus
+    # prevalecem sobre a exclusao — um crime pode ser discutido em ACP conexa.
+    crim_explicito = (bool(re.search("|".join(CRIM_PAPEL), papeis))
+                      or "HABEAS CORPUS" in (classe or "").upper())
+    criminal = (crim_explicito
+                or (bool(MP.search(" ".join(ativos + passivos)))
+                    and not (IMPROBIDADE.search(bruto or "") and not crim_explicito)))
     t_at = [tipo_parte(x) for x in ativos]
     if "MP" in t_at:                           polo = "MP"
     elif any(MP.search(x) for x in passivos):  polo = "defesa/particular"

@@ -37,9 +37,9 @@ criminais**:
 | Sobresta (inciso III) | 2,3% |
 | Juízo de retratação (inciso II) | 1,6% |
 
-**Assimetria acusação × defesa (criminais):** Ministério Público 611/2.120 = **28,8%**
-de admissão; defesa 38/12.760 = **0,30%**. Razão **96,8×**, presente nos oito
-trimestres do biênio (mínimo 13×, máximo 530×).
+**Assimetria acusação × defesa (criminais):** Ministério Público 605/2.107 = **28,7%**
+de admissão; defesa 32/12.419 = **0,26%**. Razão **111,4×**, presente em todos os
+trimestres do biênio.
 
 **O mecanismo não é preferência do julgador — é o catálogo de repercussão geral do
 STF.** As negativas à defesa concentram-se nos Temas 181 (8.492 ocorrências), 339
@@ -73,6 +73,8 @@ docs/
   06-dicionario-de-dados.md    colunas, tipos e valores possíveis
   07-recorte-defensivo.md      onde o RE da defesa falha e onde passa
   relatorio-para-criminalistas.md   relatório em linguagem corrente, para quem advoga
+  caso-earesp-2486330.md            um caso confrontado com o corpus
+  rastreamento-retratacao.md        por que a eficácia do art. 1.030, II ficou sem resposta
 src/estudo_re/
   coleta/       djen.py · datajud.py · atas.py
   processamento/ partes.py · taxonomia.py · cruzamento.py

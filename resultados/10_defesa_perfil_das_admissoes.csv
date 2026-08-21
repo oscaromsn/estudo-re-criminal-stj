@@ -1,14 +1,13 @@
 dimensao,valor,n,pct
-inciso_citado,"V, a",32,84.2%
-inciso_citado,V,4,10.5%
-inciso_citado,"I, a",1,2.6%
-inciso_citado,,1,2.6%
-classe,RECURSO ESPECIAL,20,52.6%
-classe,AGRAVO EM RECURSO ESPECIAL,9,23.7%
-classe,RECURSO ORDINáRIO EM HABEAS CORPUS,3,7.9%
-classe,EMBARGOS DE DIVERGêNCIA EM RECURSO ESPECIAL,2,5.3%
-classe,RECURSO ORDINáRIO EM MANDADO DE SEGURANçA,2,5.3%
-classe,CONFLITO DE COMPETêNCIA,1,2.6%
-classe,HABEAS CORPUS,1,2.6%
-com_tema_rg,sem tema,28,73.7%
-com_tema_rg,com tema,10,26.3%
+inciso_citado,"V, a",29,90.6%
+inciso_citado,V,2,6.2%
+inciso_citado,"I, a",1,3.1%
+classe,RECURSO ESPECIAL,18,56.2%
+classe,AGRAVO EM RECURSO ESPECIAL,6,18.8%
+classe,RECURSO ORDINáRIO EM HABEAS CORPUS,3,9.4%
+classe,RECURSO ORDINáRIO EM MANDADO DE SEGURANçA,2,6.2%
+classe,EMBARGOS DE DIVERGêNCIA EM RECURSO ESPECIAL,1,3.1%
+classe,CONFLITO DE COMPETêNCIA,1,3.1%
+classe,HABEAS CORPUS,1,3.1%
+com_tema_rg,sem tema,25,78.1%
+com_tema_rg,com tema,7,21.9%

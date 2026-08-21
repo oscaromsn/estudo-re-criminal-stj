@@ -3,7 +3,7 @@
 PY := python3
 export PYTHONPATH := src
 
-.PHONY: analise defesa cruzamento taxonomia coleta atas teste limpar ajuda
+.PHONY: analise defesa retratacao cruzamento taxonomia coleta atas teste limpar ajuda
 
 ajuda:
 	@grep -E '^[a-z-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-14s %s\n",$$1,$$2}'
@@ -13,6 +13,9 @@ analise: ## Regera as tabelas de resultado (segundos)
 
 defesa: ## Recorte defensivo — onde o RE da defesa falha e onde passa
 	$(PY) -m estudo_re.analise.defesa
+
+retratacao: ## Rastreia o que a turma decidiu após o art. 1.030, II (consulta o DJEN)
+	$(PY) -m estudo_re.analise.retratacao
 
 cruzamento: ## Refaz o cruzamento das três fontes (~1 min)
 	$(PY) -m estudo_re.processamento.cruzamento

@@ -89,10 +89,29 @@ INFRAESTRUTURA LTDA`. O órgão 59696 processa todos os REs do STJ, não só cri
 presença do MP em algum polo, ou classe habeas corpus) e aplicar o eixo MP × defesa
 **somente** aos criminais.
 
-**Consequência.** 52,4% das decisões de admissibilidade são criminais.
-**Validação independente:** confrontado com a classificação por assunto TPU do
-DataJud — construção inteiramente distinta —, o flag concorda em **99,5%** dos 6.819
-casos cruzados.
+**Consequência.** ~52% das decisões de admissibilidade são criminais.
+
+**Correção (2026-08-21) — a validação original estava errada.** Este ADR registrava
+concordância de 99,5% com a classificação por assunto TPU do DataJud. A medida era
+**unilateral**: comparava apenas os casos em que o TPU dizia "criminal", o que mede
+revocação, não precisão. A validação bilateral, sobre as 15.912 decisões que casam com
+o DataJud, dá:
+
+- **Precisão 94,9%** — dos marcados criminais, 5,1% são cíveis
+- **Revocação 99,2%** — dos criminais reais, 99,2% são capturados
+
+A causa do falso positivo: **o MP é parte em ação civil** (improbidade, ação civil
+pública, saúde, ambiental). O flag dispara pela presença dele. `partes.py` passou a
+excluir improbidade — o caso mais volumoso e identificável —, com papel criminal
+explícito prevalecendo sobre a exclusão.
+
+Efeito: os números agregados mal se movem (a assimetria MP/defesa **sobe** de 96,8×
+para 111,4×), mas **desfechos raros mudam de patamar** — as retratações da defesa caem
+de 37 para 14. Ver `docs/rastreamento-retratacao.md`.
+
+**Lição:** validação unilateral cria falsa confiança, e o erro aparece primeiro nos
+eventos raros. Para qualquer análise de desfecho raro, use `criminais_3fontes.csv`, onde
+o assunto é confirmado pelo TPU.
 
 ---
 
