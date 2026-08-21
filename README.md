@@ -54,6 +54,10 @@ ordem tributária.
 Turma são admitidas **9,5%** das vezes contra **4,7%** da Quinta; a Terceira Seção
 registra 0,9% em 218 casos.
 
+Para quem advoga na área, o [**relatório para criminalistas**](docs/relatorio-para-criminalistas.md)
+traduz os achados em decisões práticas — qual veículo recursal preserva a via
+constitucional, quais erros consomem mais recursos, e o que caracteriza os 0,3% que passam.
+
 Detalhamento e ressalvas em [`docs/04-limitacoes-e-vieses.md`](docs/04-limitacoes-e-vieses.md).
 Nenhum número deste projeto deve ser citado sem ler esse documento.
 
@@ -68,6 +72,7 @@ docs/
   05-trabalhos-futuros.md      o que fechar e o que abrir
   06-dicionario-de-dados.md    colunas, tipos e valores possíveis
   07-recorte-defensivo.md      onde o RE da defesa falha e onde passa
+  relatorio-para-criminalistas.md   relatório em linguagem corrente, para quem advoga
 src/estudo_re/
   coleta/       djen.py · datajud.py · atas.py
   processamento/ partes.py · taxonomia.py · cruzamento.py
