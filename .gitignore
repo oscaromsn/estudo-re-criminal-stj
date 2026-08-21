@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# MICRODADOS NÃO VÃO PARA O REPOSITÓRIO PÚBLICO.
+# O corpus traz nome civil de acusados em processos criminais e advogados com
+# OAB. São dados públicos — vêm do DJEN, gazeta oficial com API aberta —, mas
+# republicá-los em massa, estruturados e indexáveis, é passo diferente de
+# estarem dispersos no diário. Quem quiser reproduzir roda `make coleta`
+# (~3 h) e obtém o mesmo corpus direto da fonte oficial.
+# ---------------------------------------------------------------------------
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/decisoes_admissibilidade.csv
+data/processed/criminais_3fontes.csv
+
+# Cache do catálogo CKAN — `coleta/atas.py` regenera na primeira execução
+data/raw/ckan_atas_recursos.json

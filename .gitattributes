@@ -1,0 +1,15 @@
+# Corpora e tabelas grandes vão para o Git LFS. São artefatos de coleta que
+# custaram ~3 h de requisições a APIs públicas — versioná-los evita recoletar,
+# mas eles não devem inchar o histórico do repositório.
+*.jsonl.gz  filter=lfs diff=lfs merge=lfs -text
+*.csv.gz    filter=lfs diff=lfs merge=lfs -text
+*.json.gz   filter=lfs diff=lfs merge=lfs -text
+
+# Tabelas analíticas grandes o bastante para o mesmo tratamento.
+data/processed/decisoes_admissibilidade.csv filter=lfs diff=lfs merge=lfs -text
+data/processed/criminais_3fontes.csv        filter=lfs diff=lfs merge=lfs -text
+
+# Texto normal: garante diff legível independentemente de heurística.
+*.py   text
+*.md   text
+*.csv  text
