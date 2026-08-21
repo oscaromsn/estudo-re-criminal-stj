@@ -3,6 +3,8 @@ name = "estudo-re-criminal-stj"
 version = "1.0.0"
 description = "Admissibilidade de recursos extraordinários criminais no STJ — biênio 2024-2026 da Vice-Presidência"
 requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
 dependencies = []   # biblioteca padrão apenas — ver docs/03-decisoes-metodologicas.md, ADR-007
 
 [tool.setuptools.packages.find]

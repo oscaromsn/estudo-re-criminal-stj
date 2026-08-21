@@ -118,3 +118,14 @@ make coleta && make atas && make taxonomia && make cruzamento && make analise &&
 
 O caminho até essas três — e por que as alternativas óbvias não serviram — está em
 [`docs/01-viabilidade.md`](docs/01-viabilidade.md).
+
+## Licença
+
+[MIT](LICENSE).
+
+Cobre o código, a documentação e as tabelas agregadas deste repositório. **Não se
+estende aos dados de origem**: as decisões vêm do Diário de Justiça Eletrônico Nacional
+e as tabelas de referência do CNJ, cada um sob seus próprios termos. Quem regenerar o
+corpus com `make coleta` está obtendo dados públicos direto da fonte oficial e responde
+pelo uso que fizer deles — inclusive quanto à LGPD, já que o corpus contém nome civil de
+acusados em processos criminais.
