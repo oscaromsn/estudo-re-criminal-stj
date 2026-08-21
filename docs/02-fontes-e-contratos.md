@@ -155,6 +155,14 @@ como rótulos institucionais, não nomes — coerente com o enquadramento do est
 
 ---
 
+## Uma armadilha de parsing que corrompeu números
+
+O STJ escreve temas de repercussão geral com separador de milhar: **"Tema n. 1.392"**.
+Uma regex ingênua (`Tema\s*n?\.?\s*(\d{1,4})`) captura só o `1` — e "Tema 1" aparecia
+como um dos mais citados do corpus, quando era a soma de dezenas de temas 1.xxx
+distintos. O padrão correto está em `taxonomia.py`: `(\d{1,2}\.\d{3}|\d{1,4})`, com
+remoção do ponto depois.
+
 ## Normalização entre fontes
 
 A chave de junção é o número CNJ **somente dígitos**. O DJEN publica com máscara

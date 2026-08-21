@@ -18,6 +18,17 @@ Base: **12.760 decisões criminais com a defesa recorrente**, 38 admitidas (0,30
 
 Critério da classificação e suas fronteiras discutíveis: ADR-011.
 
+### O erro de via recursal — 85% dos REs vindos de habeas corpus
+
+**302 dos 354 REs da defesa interpostos contra acórdão do STJ em habeas corpus** morrem
+porque a via correta era o **recurso ordinário constitucional** (art. 102, II, "a"), não o
+extraordinário. As decisões qualificam como **"erro grosseiro"**, o que afasta a
+fungibilidade recursal. No corpus inteiro, 466 decisões da defesa invocam esse fundamento.
+
+Ele é medido pela coluna `fundamentos_mencionados`, não pela ancorada: a razão aparece no
+item 2 da decisão, antes de uma longa transcrição de precedente do STF, e fica fora da
+janela de 1.500 caracteres que precede o dispositivo.
+
 ### A maior perda evitável
 
 | causa | n | % das derrotas |

@@ -20,6 +20,8 @@ cruzamento: ## Refaz o cruzamento das três fontes (~1 min)
 taxonomia: ## Reclassifica o corpus DJEN inteiro (~8 min)
 	$(PY) -m estudo_re.processamento.taxonomia data/raw/djen_comunicacoes.jsonl.gz \
 		--csv data/interim/taxonomia_completa.csv
+	@# cruzamento lê o .gz — sem recomprimir aqui, ele consumiria a versão anterior
+	gzip -f -k data/interim/taxonomia_completa.csv
 
 coleta: ## Rebaixa DJEN e DataJud das APIs (~3 h, retomável)
 	$(PY) -m estudo_re.coleta.djen --inicio 2024-11-01 --fim 2026-08-19 --pausa 4

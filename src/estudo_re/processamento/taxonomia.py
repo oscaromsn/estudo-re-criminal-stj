@@ -76,6 +76,11 @@ FUNDAMENTO = [
     ("ofensa_reflexa",           r"ofensa\s+(?:reflexa|indireta)|viola[çc][ãa]o\s+reflexa"),
     ("rg_preliminar_ausente",    r"preliminar\s+(?:formal\s+)?de\s+repercuss[ãa]o\s+geral|art\.?\s*1\.?035,?\s*§\s*2"),
     ("rg_tema_conformidade",     r"tema\s*n?\.?\s*\d{1,4}|repercuss[ãa]o\s+geral"),
+    # Erro de via recursal: RE contra acordao do STJ que denega HC/MS/HD/MI,
+    # quando o art. 102, II, "a" da CF exige recurso ORDINARIO. As decisoes
+    # qualificam como "erro grosseiro", o que afasta a fungibilidade recursal.
+    # E a causa isolada mais frequente de inadmissao nos REs vindos de HC.
+    ("via_errada_cabia_RO",      r"cab[íi]vel\s+recurso\s+ordin[áa]rio|erro\s+grosseiro"),
     ("intempestivo",             r"intempestiv|fora\s+do\s+prazo"),
     ("deserto_preparo",          r"deser[çt]|preparo"),
     ("repetitivo_conformidade",  r"recursos?\s+repetitivos?"),
@@ -111,7 +116,10 @@ DISPOSITIVO_ESPECIAL = [
     ("desistencia_homologada",   r"homolog\w*\s+.{0,30}desist"),
 ]
 
-TEMA_RG = re.compile(r"[Tt]ema\s*n?\.?\s*(\d{1,4})")
+# O STJ escreve "Tema n. 1.392" com separador de milhar. Capturar so \d{1,4}
+# truncava para "1" — e "Tema 1" aparecia como um dos mais citados do corpus,
+# quando na verdade era a soma de dezenas de temas 1.xxx distintos.
+TEMA_RG = re.compile(r"[Tt]ema\s*n?\.?\s*(\d{1,2}\.\d{3}|\d{1,4})")
 ASSINATURA = re.compile(r"\b(Vice-Presidente|Presidente|Ministr[oa])\s+([A-ZÁÉÍÓÚÂÊÔÃÕÇ]{3,}(?:\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{2,}){1,4})\s*$")
 CABECALHO = re.compile(r"^\s*(RE|ARE|AREsp|REsp|HC|RHC|EDcl|AgRg)[^(]{0,60}\(([\d/\-]+)\)")
 PAPEIS = ("RECORRENTE","RECORRIDO","AGRAVANTE","AGRAVADO","IMPETRANTE","IMPETRADO",
@@ -134,7 +142,7 @@ def classificar(item):
     cab = campos_cabecalho(t)
     disp = [n for n, rx in DISPOSITIVO if re.search(rx, t, re.I)]
     fund = [n for n, rx in FUNDAMENTO if re.search(rx, t, re.I)]
-    temas = sorted(set(TEMA_RG.findall(t)))
+    temas = sorted({m.replace(".", "") for m in TEMA_RG.findall(t)})
     ass = ASSINATURA.search(t)
     pf = perfil(item.get("texto"), item.get("nomeClasse") or "")
     ato = next((n for n, rx in TIPO_ATO if re.search(rx, t, re.I)), "outro")

@@ -16,6 +16,7 @@ import argparse, collections, csv, gzip, os
 
 # --- classificacao normativa da falha (ADR-011) ---
 EVITAVEL = {
+    "via_errada_cabia_RO":    "via errada — cabia recurso ordinário (art. 102, II, a), não RE",
     "sum281_nao_esgotamento": "não esgotou a instância (cabia agravo interno antes)",
     "sum282_356_prequest":    "falta de prequestionamento",
     "sum284_deficiencia":     "fundamentação deficiente (Súmula 284)",

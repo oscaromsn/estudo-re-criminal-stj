@@ -109,6 +109,7 @@ def main():
     ap.add_argument("--tpu", default="data/referencia/tpu-assuntos.json.gz")
     ap.add_argument("--mapa", default="data/processed/mapa_gabinete_turma.csv")
     ap.add_argument("--saida", default="data/processed/criminais_3fontes.csv")
+    ap.add_argument("--saida-decisoes", default="data/processed/decisoes_admissibilidade.csv")
     a = ap.parse_args()
 
     crim = codigos_criminais(a.tpu)
@@ -127,6 +128,22 @@ def main():
             r = json.loads(l)
             atas[r["cnj"]].append(r)
     print(f"Atas: {len(atas)} processos indexados")
+
+    # Projecao enxuta de TODAS as decisoes de admissibilidade (todas as materias),
+    # independente de casarem com o DataJud. E a base de `analise/resultados.py` e
+    # `analise/defesa.py`. Antes era gerada por script avulso — o que a deixava
+    # desatualizada sempre que a taxonomia era reprocessada.
+    COLS_DEC = ["id", "data", "processo", "classe", "criminal", "dispositivo",
+                "inciso_citado", "fundamentos", "temas_rg", "polo_recorrente",
+                "tipo_recorrente", "n_advogados", "defensoria", "anonimizado", "assinatura"]
+    n_dec = 0
+    with abrir(a.taxonomia) as f, open(a.saida_decisoes, "w", newline="", encoding="utf-8") as g:
+        w = csv.DictWriter(g, fieldnames=COLS_DEC)
+        w.writeheader()
+        for r in csv.DictReader(f):
+            if r["tipo_ato"] == "RE_admiss" and r["tipoDocumento"] == "DESPACHO / DECISÃO":
+                w.writerow({c: r.get(c, "") for c in COLS_DEC}); n_dec += 1
+    print(f"decisões de admissibilidade: {n_dec} -> {a.saida_decisoes}")
 
     mapa = carregar_mapa(a.mapa)
     linhas, casou = [], 0
